@@ -1,6 +1,5 @@
 <?php
-require_once 'db_config.php';
-
+require_once 'C:\Users\dell\Desktop\daomvc\Model\config.php';
 class Database {
     private static $instance;
     private $connection;
@@ -21,5 +20,3 @@ class Database {
         return $this->connection;
     }
 }
-
-?>
