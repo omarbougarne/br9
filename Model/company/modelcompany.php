@@ -10,9 +10,6 @@ class Company{
         $this->company_image = $company_image;
     }
 
-    // Add getters and setters as needed
-    // ...
-
     public function getCompanyId(){
         return $this->company_id;
     }

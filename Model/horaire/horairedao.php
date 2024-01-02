@@ -1,5 +1,6 @@
 <?php
-require_once 'Model/connexion.php';
+require_once __DIR__ . '/../connexion.php';
+require_once 'modelhoraire.php';
 
 class HoraireDAO{
     private $db;
@@ -60,5 +61,22 @@ class HoraireDAO{
         $stmt->bindParam(':schedule_id', $schedule_id);
         $stmt->execute();
     }
+    public function getTravelsBetweenCities($departureCity, $destinationCity,$horaire) {
+        $query = "SELECT c.company_image, b.bus_number, h.departure_time
+                  FROM horaire h
+                  JOIN bus b ON h.bus_id = b.ID
+                  JOIN company c ON b.fk_company = c.company_id
+                  JOIN route r ON h.route_id = r.route_id
+                  WHERE r.departure_city = :departureCity
+                    AND r.destination_city = :destinationCity";
+        
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':departureCity',$horaire -> $departureCity);
+        $stmt->bindParam(':destinationCity',$horaire -> $destinationCity);
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+    }
+
 }
 ?>

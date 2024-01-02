@@ -1,5 +1,7 @@
 <?php
-require_once 'Model/connexion.php';
+require_once __DIR__ . '/../connexion.php';
+require_once 'modelbus.php';
+
 
 class BusDAO{
     private $db;
