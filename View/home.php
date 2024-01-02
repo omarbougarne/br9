@@ -27,18 +27,11 @@ require_once __DIR__ . '/../Model/route/modelroute.php';
 require_once __DIR__ . '/../Model/company/companydao.php';
 require_once __DIR__ . '/../Model/company/modelcompany.php';
 
-// Create an instance of CompanyDAO
+
 $companyDAO = new CompanyDAO();
-
-// Get companies using the get_companies() method
 $companies = $companyDAO->get_companies();
-// Assume you have a function in your CityDAO to get city names
 $cityDAO = new CityDAO();
-
-// Get cities using the get_city() method
 $cities = $cityDAO->get_city();
-
-// Assume you have a function in your RouteDAO to get departure and destination cities
 $routedao = new RouteDAO();
 $routes = $routedao->get_routes();
 ?>
@@ -66,19 +59,18 @@ $routes = $routedao->get_routes();
 	<nav class="navbar  bg-primary main-nav">
 		<div class="container bg-primary">
 			<div class="navbar-header bg-primary">
-				<a class="navbar-brand text-light" href="#">Bus Booking</a>
+				<a class="navbar-brand text-light" href="home.php">Bus Booking</a>
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav">
-					<li class="active"><a class="text-light" href="#">Home</a></li>
-					<li><a class="text-light" href="#routes">Routes</a></li>
+					<li><a class="text-light" href="home.php">Home</a></li>
 					<li><a class="text-light" href="#companies">Bus Companies</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 	</div>
-	<div id="booking" class="section form-div">
+	<div id="booking" class="section form-div sticky-top">
 		<div class="section-center">
 			<div class="container">
 				<div class="row">
@@ -140,7 +132,7 @@ $routes = $routedao->get_routes();
 									</div>
 								</div>
 								<div class="form-btn">
-									<button class="submit-btn">Search</button>
+									<a class="submit-btn" href="search.php" >Search </a>
 								</div>
 							</form>
 						</div>
@@ -153,15 +145,15 @@ $routes = $routedao->get_routes();
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2>Our Bus Companies</h2>
-                <p>Learn more about the bus companies we collaborate with.</p>
+                <h2 class="text-center">Our Bus Companies</h2>
+                <p class="text-center">Learn more about the bus companies we collaborate with.</p>
             </div>
         </div>
-        <div class="row">
+        <div class="row " style="margin-top: 100px;">
             <?php foreach ($companies as $company): ?>
-                <div class="col-md-4">
+                <div class="col-lg-3" >
                     <div class="company-card">
-                        <img  src="data:image/jpg;base64,<?php echo base64_encode($company->getCompanyImage()); ?>" alt="<?php echo $company->getCompanyName(); ?>" class="company-image">
+                        <img class=""  src="data:image/jpg;base64,<?php echo base64_encode($company->getCompanyImage()); ?>" alt="<?php echo $company->getCompanyName(); ?>" class="company-image">
                         <h3><?php echo $company->getCompanyName(); ?></h3>
                     </div>
                 </div>
@@ -169,27 +161,191 @@ $routes = $routedao->get_routes();
         </div>
     </div>
 </section>
-<footer class="footer bg-primary" style="margin-top: 1000px;">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <h4>Contact Us</h4>
-                <p>Email: info@busbooking.com</p>
-                <p>Phone: +1 (555) 123-4567</p>
-            </div>
-            <div class="col-md-6">
-                <h4>Follow Us</h4>
-                <a href="#" target="_blank"><i class="bi bi-facebook" style="color: brown;"></i></a>
-                <a href="#" target="_blank"><i class="bi bi-twitter"style="color: brown;"></i></a>
-                <a href="#" target="_blank"><i class="bi bi-instagram"style="color: brown;"></i></a>
+<div style="margin-top: 500px;">
+    <div class="container" >
+        <div class="row" >
+            <div class="col-md-12 text-center">
+			<h2 class="book">Book in 3 steps</h2>
+                <p><b>Simple, Fast, Secure</b></p>
+                <p>Thanks to our online booking platform, reserving your coach ticket has never been easier.</p>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
-                <p>&copy; <?php echo date('Y'); ?> Bus Booking. All rights reserved.</p>
+            <div class="col-md-4  etape1">
+                <h3>Step 1</h3>
+                <p><strong>choose</strong></p>
+				<i class="bi bi-bus-front"></i>
+                <p>Find the offer that suits you and select the seats of your choice.</p>
+            </div>
+            <div class="col-md-4  etape2">
+                <h3>Step 2</h3>
+                <p><strong>Book</strong></p>
+				<i class="bi bi-ticket-perforated-fill"></i>
+                <p>Choose from our various payment methods (by card or cash) and pay securely. You will receive a confirmation of your reservation by email and SMS.</p>
+            </div>
+            <div class="col-md-4  etape3">
+                <h3>Step 3</h3>
+                <p><strong>Get In</strong></p>
+				<i class="bi bi-suitcase"></i>
+                <p>Meet at the departure address with your ticket code, present it at boarding, and board the bus with peace of mind.</p>
             </div>
         </div>
     </div>
+	</div>
+<section style="margin-top: 100px;">
+  <h3 class="text-center mb-4 pb-2 text-primary fw-bold">FAQ</h3>
+  <p class="text-center mb-5">
+    Find the answers for the most frequently asked questions below
+  </p>
+
+  <div class="row">
+    <div class="col-md-6 col-lg-4 mb-4">
+      <h6 class="mb-3 text-primary"><i class="far fa-paper-plane text-primary pe-2"></i><b> A simple
+        question?</b></h6>
+      <p>
+        <strong><u>Absolutely!</u></strong> We work with top payment companies which guarantees
+        your
+        safety and
+        security. All billing information is stored on our payment processing partner.
+      </p>
+    </div>
+
+    <div class="col-md-6 col-lg-4 mb-4">
+      <h6 class="mb-3 text-primary"><i class="fas fa-pen-alt text-primary pe-2"></i><b> A question
+        that
+        is longer then the previous one?</b></h6>
+      <p>
+        <strong><u>Yes, it is possible!</u></strong> You can cancel your subscription anytime in
+        your
+        account. Once the subscription is
+        cancelled, you will not be charged next month.
+      </p>
+    </div>
+
+    <div class="col-md-6 col-lg-4 mb-4">
+      <h6 class="mb-3 text-primary"><i class="fas fa-user text-primary pe-2"></i><b> A simple
+        question?</b>
+      </h6>
+      <p>
+        Currently, we only offer monthly subscription. You can upgrade or cancel your monthly
+        account at any time with no further obligation.
+      </p>
+    </div>
+
+    <div class="col-md-6 col-lg-4 mb-4">
+      <h6 class="mb-3 text-primary"><i class="fas fa-rocket text-primary pe-2"></i><b> A simple
+        question?</b>
+      </h6>
+      <p>
+        Yes. Go to the billing section of your dashboard and update your payment information.
+      </p>
+    </div>
+
+    <div class="col-md-6 col-lg-4 mb-4">
+      <h6 class="mb-3 text-primary"><i class="fas fa-home text-primary pe-2"></i><b> A simple
+        question?</b>
+      </h6>
+      <p><strong><u>Unfortunately no</u>.</strong> We do not issue full or partial refunds for any
+        reason.</p>
+    </div>
+
+    <div class="col-md-6 col-lg-4 mb-4">
+      <h6 class="mb-3 text-primary"><i class="fas fa-book-open text-primary pe-2"></i><b> Another
+        question that is longer than usual</b></h6>
+      <p>
+        Of course! We happy to offer a free plan to anyone who wants to try our service.
+      </p>
+    </div>
+  </div>
+</section>
+<footer class="text-center text-lg-start bg-body-tertiary text-muted bg-primary">
+  <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+    <div class="me-5 d-none d-lg-block">
+      <span>Get connected with us on social networks:</span>
+    </div>
+    <div>
+      <a href="" class="me-4 text-reset">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="" class="me-4 text-reset">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="" class="me-4 text-reset">
+        <i class="fab fa-google"></i>
+      </a>
+      <a href="" class="me-4 text-reset">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="" class="me-4 text-reset">
+        <i class="fab fa-linkedin"></i>
+      </a>
+      <a href="" class="me-4 text-reset">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+  </section>
+  <section class="">
+    <div class="container text-center text-md-start mt-5">
+      <div class="row mt-3">
+        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+          <h6 class="text-uppercase fw-bold mb-4">
+            <i class="fas fa-gem me-3"></i>Company name
+          </h6>
+          <p>
+            Here you can use rows and columns to organize your footer content. Lorem ipsum
+            dolor sit amet, consectetur adipisicing elit.
+          </p>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+          <h6 class="text-uppercase fw-bold mb-4">
+            Products
+          </h6>
+          <p>
+            <a href="#" class="text-light">Angular</a>
+          </p>
+          <p>
+            <a href="#" class="text-light">React</a>
+          </p>
+          <p>
+            <a href="#" class="text-light">Vue</a>
+          </p>
+          <p>
+            <a href="#" class="text-light">Laravel</a>
+          </p>
+        </div>
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+          <h6 class="text-uppercase fw-bold mb-4">
+            Useful links
+          </h6>
+          <p>
+            <a href="#" class="text-light">Pricing</a>
+          </p>
+          <p>
+            <a href="#" class="text-light">Settings</a>
+          </p>
+          <p>
+            <a href="#" class="text-light">Orders</a>
+          </p>
+          <p>
+            <a href="#" class="text-light">Help</a>
+          </p>
+        </div>
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+          <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+          <p><i class="fas fa-home me-3"></i> New York, NY 10012, US</p>
+          <p>
+            <i class="fas fa-envelope me-3"></i>
+            info@example.com
+          </p>
+          <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
+          <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
+        </div>
+      </div>
+	    </div>
+  </section>
+  <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05); margin-top:100px;">
+    &copy; 2024 Copyright
+  </div>
 </footer>
 
 	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
