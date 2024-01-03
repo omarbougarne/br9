@@ -9,6 +9,11 @@ require_once __DIR__ . '/../Model/horaire/horairedao.php';
 require_once __DIR__ . '/../Model/horaire/modelhoraire.php';
 require_once __DIR__ . '/../Model/bus/busdao.php';
 require_once __DIR__ . '/../Model/bus/modelbus.php';
+require_once __DIR__ . '/../Model/horaire/modeltravel.php';
+require_once __DIR__ . '/../Controller/controllerhoraire.php';
+
+
+
 
 
 $companyDAO = new CompanyDAO();
@@ -17,6 +22,8 @@ $cityDAO = new CityDAO();
 $cities = $cityDAO->get_city();
 $routedao = new RouteDAO();
 $routes = $routedao->get_routes();
+$horairedao = new HoraireDAO();
+$horaires = $horairedao->get_horaires();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,12 +62,12 @@ $routes = $routedao->get_routes();
                 </div>
                 <div class="col-lg-12">
                     <div class="booking-form">
-                        <form method="post">
+                      <form method="post" action="search.php?action=search">
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <span class="form-label">Departure</span>
-                                        <select class="form-control" name="check_in" required>
+                                        <select class="form-control" name="departure_city" required>
                                             <?php foreach ($cities as $city): ?>
                                                 <option name ="departure_city" value="<?php echo $city->getNamecity(); ?>"><?php echo $city->getNamecity(); ?></option>
                                             <?php endforeach; ?>
@@ -70,7 +77,7 @@ $routes = $routedao->get_routes();
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <span class="form-label">Destination</span>
-                                        <select class="form-control" name="check_out" required>
+                                        <select class="form-control" name="destination_city" required>
                                             <?php foreach ($cities as $city): ?>
                                                 <option name ="destination_city" value="<?php echo $city->getNamecity(); ?>"><?php echo $city->getNamecity(); ?></option>
                                             <?php endforeach; ?>
@@ -82,7 +89,7 @@ $routes = $routedao->get_routes();
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <span class="form-label">Day&Time</span>
-                                        <input class="form-control" type="date" required>
+                                        <input class="form-control" type="date" name="departure_time" required>
                                     </div>
                                 </div>
                             </div>
@@ -99,9 +106,7 @@ $routes = $routedao->get_routes();
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-btn">
-                                <a class="submit-btn col-lg-12 text-center" href="search.php">Search </a>
-                            </div>
+                            <input class="submit-btn col-lg-12 text-center" type="submit" value="Search">
                         </form>
                     </div>
                 </div>
@@ -160,15 +165,23 @@ $routes = $routedao->get_routes();
             <div class="table-responsive">
             <table class="table table-hover">
     <tbody>
-        <?php foreach ($horaires as $horaire): ?>
-            <tr>
-                <td class="image"><img src="<?php echo $horaire['company_image']; ?>" alt=""></td>
-                <td class="product">
-                    <strong><?php echo $horaire['bus_number']; ?></strong><br>
-                    Departure Time: <?php echo $horaires['departure_time']; ?>
-                </td>
-            </tr>
-        <?php endforeach; ?>
+      
+    
+    <?php var_dump($result);  foreach ($travelInfo as $info): ?>
+        <tr>
+            <td class="image"><img src="<?php echo base64_encode($info->getCompanyImage()) ; ?>" alt=""></td>
+            <td class="product">
+                <strong><?php echo $info->getBusNumber(); ?></strong><br>
+                Departure Time: <?php echo $info->getDepartureTime(); ?>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+
+
+
+
+
+
     </tbody>
 </table>
             </div>

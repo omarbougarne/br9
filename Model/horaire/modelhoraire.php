@@ -7,6 +7,9 @@ class Horaire{
     private $departure_time;
     private $arrival_time;
     private $seats_available;
+    // private $company_image;
+    // private $bus_number;
+
 
     public function __construct($schedule_id, $bus_id, $route_id, $departure_date, $departure_time, $arrival_time, $seats_available){
         $this->schedule_id = $schedule_id;
@@ -16,6 +19,8 @@ class Horaire{
         $this->departure_time = $departure_time;
         $this->arrival_time = $arrival_time;
         $this->seats_available = $seats_available;
+        // $this->company_image = $company_image;
+        // $this->bus_number = $bus_number;
     }
 
     // Add getters and setters as needed
@@ -48,5 +53,14 @@ class Horaire{
     public function getSeatsAvailable(){
         return $this->seats_available;
     }
+    // public function getCompanyImage(){
+    //     return $this->company_image;
+    // }
+    // public function getBusNumber(){
+    //     return $this->bus_number;
+    // }
+    
+    
 }
+
 ?>

@@ -85,14 +85,14 @@ $routes = $routedao->get_routes();
 					</div>
 					<div class="col-md-4 col-md-pull-7">
 						<div class="booking-form">
-							<form>
+            <form method="post" action="controllerhoraire.php?action=search">
                                 <div class="row">
 								<div class="col-sm-6">
 									<div class="form-group">
 										<span class="form-label">Departure</span>
 										<select class="form-control" name="check_in" required>
 											<?php foreach ($cities as $city): ?>
-												<option value="<?php echo $city->getNamecity(); ?>"><?php echo $city->getNamecity(); ?></option>
+												<option value="<?php  echo $city->getNamecity(); ?>"><?php echo $city->getNamecity(); ?></option>
 											<?php endforeach; ?>
 										</select>
 									</div>

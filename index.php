@@ -1,24 +1,24 @@
-<?php 
-// include "Contoller/controllerBook.php" ;
-// $contoller_Books = new contoller_Books() ; 
+<!-- 
+include "Contoller/controllerhoraire.php" ;
+$controller_horaire = new HoraireController() ; 
 
 
-// if (isset($_GET["action"])) {
-//     $action = $_GET["action"] ; 
-//     if ($action === "update") {
-//         $contoller_Books->setBooks() ; 
-//     }
-//     if ($action === "Books") {
+if (isset($_GET["action"])) {
+    $action = $_GET["action"] ; 
+    if ($action === "search") {
+        $controller_horaire ->getTravelsBetweenCities() ; 
+    }
+    if ($action === "Books") {
       
-//     }
+    }
    
 
-// }else {
-//     $contoller_Books->getBooks() ;
-// }
+}else {
+    $contoller_Books->getBooks() ;
+}
 
 
 
  
 
-
+ -->

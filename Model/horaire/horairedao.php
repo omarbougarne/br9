@@ -1,7 +1,8 @@
 <?php
 require_once __DIR__ . '/../connexion.php';
 require_once 'modelhoraire.php';
-
+require_once 'modeltravel.php';
+ 
 class HoraireDAO{
     private $db;
 
@@ -24,6 +25,8 @@ class HoraireDAO{
                 $horaireData["departure_time"],
                 $horaireData["arrival_time"],
                 $horaireData["seats_available"]
+                // $horaireData["company_image"],
+                // $horaireData["bus_number"]
             );
         }
         return $horaires;
@@ -61,7 +64,7 @@ class HoraireDAO{
         $stmt->bindParam(':schedule_id', $schedule_id);
         $stmt->execute();
     }
-    public function getTravelsBetweenCities($departureCity, $destinationCity,$horaire) {
+    public function getTravelsBetweenCities($departureCity, $destinationCity) {
         $query = "SELECT c.company_image, b.bus_number, h.departure_time
                   FROM horaire h
                   JOIN bus b ON h.bus_id = b.ID
@@ -69,14 +72,23 @@ class HoraireDAO{
                   JOIN route r ON h.route_id = r.route_id
                   WHERE r.departure_city = :departureCity
                     AND r.destination_city = :destinationCity";
-        
+    
         $stmt = $this->db->prepare($query);
-        $stmt->bindParam(':departureCity',$horaire -> $departureCity);
-        $stmt->bindParam(':destinationCity',$horaire -> $destinationCity);
+        $stmt->bindParam(':departureCity', $departureCity, PDO::PARAM_STR);
+        $stmt->bindParam(':destinationCity', $destinationCity, PDO::PARAM_STR);
         $stmt->execute();
-
-        return $stmt->fetchAll();
+    
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $travelInfo = array();
+    
+        foreach ($result as $row) {
+            $travelInfo[] = new TravelInfo(
+                $row["company_image"],
+                $row["bus_number"],
+                $row["departure_time"]
+            );
+        }
+        return $travelInfo;
     }
-
-}
+ }
 ?>
